@@ -13,7 +13,7 @@ class PenerbitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function read()
+    public function readPenerbit()
     {
         $penerbits = Penerbit::get();
         return response()->json([
@@ -26,7 +26,7 @@ class PenerbitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function createPenerbit(Request $request)
     {
         $penerbitBaru = Penerbit::create($request->all());
         return response()->json([

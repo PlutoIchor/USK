@@ -32,9 +32,12 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function readKategori()
     {
-        //
+        $kategori = Kategori::get()->all();
+        return response()->json([
+            'Data' => $kategori
+        ]);
     }
 
     /**
@@ -77,7 +80,7 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateKategori(Request $request, $id)
     {
         $kategori = Kategori::findOrFail($id);
         $kategori->update($request->all());
@@ -89,7 +92,7 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyKategori($id)
     {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();

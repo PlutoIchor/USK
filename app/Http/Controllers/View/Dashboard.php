@@ -1,24 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\API;
-
+namespace App\Http\Controllers\View;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Buku;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
-class BukuController extends Controller
+class Dashboard extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function readBuku()
+    public function viewDashboard()
     {
-        $bukus = Buku::get();
-        return response()->json([
-            'Buku'=> $bukus
-        ]);
+        if (Auth::user()->role == 'admin') {
+            $anggotas = User::where('role', '=', 'user')->get()->count();
+            $bukus = Buku::get()->count();
+            $peminjamans = Peminjaman::wherel('tanggal_pengembalian','=', null)->get();
+            $pengembalians = Peminjaman::whereNotNull('tanggal_pengembalian')->get();
+        }
     }
 
     /**
@@ -26,12 +30,9 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createBuku(Request $request)
+    public function create()
     {
-        Buku::create($request->all());
-        return response()->json([
-            'message' => 'Berhasil menambah buku'
-        ]);
+        //
     }
 
     /**
@@ -40,13 +41,9 @@ class BukuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateBuku(Request $request, $id)
+    public function store(Request $request)
     {
-        $buku = Buku::findOrFail($id);
-        $buku->update($request->all());
-        return response()->json([
-            'message' => 'Berhasil mengupdate buku'
-        ]);
+        //
     }
 
     /**
@@ -89,12 +86,8 @@ class BukuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyBuku($id)
+    public function destroy($id)
     {
-        $buku = Buku::findOrFail($id);
-        $buku->delete();
-        return response()->json([
-            'message' => 'Berhasil menghapus buku'
-        ]);
+        //
     }
 }

@@ -68,7 +68,7 @@ class IdentitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateIdentitas(Request $request, $id)
     {
         $identitas = Identitas::find($id);
         $identitasBaru = $identitas->update($request->all());

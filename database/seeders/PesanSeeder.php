@@ -19,7 +19,7 @@ class PesanSeeder extends Seeder
             'id_penerima' => 2,
             'id_pengirim'=> 1,
             'judul_pesan' => 'Rekomendasi buku baru',
-            'isi_pesan' => 'Bacalah buku terbaru kami, Vagabond',
+            'isi_pesan' => 'Bacalah buku terbaru perpus, Vagabond',
             'status' => 'terkirim',
             'tanggal_kirim' => now(),
         ]);
